@@ -320,8 +320,11 @@ static ssize_t smr_generic_sendmsg(struct smr_ep *ep, const struct iovec *iov,
 	/* Do not inline/inject if IPC is available so device to device
 	 * transfer may occur if possible. */
 	use_ipc = ofi_hmem_is_ipc_enabled(iface) && (iov_count == 1) &&
-		  desc && (smr_get_mr_flags(desc) & FI_HMEM_DEVICE_ONLY) &&
+		  desc &&
 		  !(op_flags & FI_INJECT);
+	// use_ipc = ofi_hmem_is_ipc_enabled(iface) && (iov_count == 1) &&
+	// 	  desc && (smr_get_mr_flags(desc) & FI_HMEM_DEVICE_ONLY) &&
+	// 	  !(op_flags & FI_INJECT);
 
 	proto = smr_select_proto(use_ipc, smr_cma_enabled(ep, peer_smr), iface,
 				 op, total_len, op_flags);

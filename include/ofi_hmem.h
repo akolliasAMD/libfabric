@@ -89,6 +89,11 @@ cudaError_t ofi_cudaFree(void *ptr);
 
 /* Libfabric support ROCr operations. */
 
+typedef struct rocr_ipc_handle {
+    hsa_amd_ipc_memory_t ipc;
+    size_t length;
+} rocr_ipc_handle_t;
+
 hsa_status_t ofi_hsa_amd_pointer_info(void *ptr, hsa_amd_pointer_info_t *info,
 				      void *(*alloc)(size_t),
 				      uint32_t *num_agents_accessible,

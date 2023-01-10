@@ -72,7 +72,8 @@ struct hsa_ops {
 					uint32_t num_dep_signals,
 					const hsa_signal_t* dep_signals,
 					hsa_signal_t completion_signal);
-	hsa_status_t (*hsa_amd_pointer_info)(void *ptr,
+	// hsa_status_t (*hsa_amd_pointer_info)(void *ptr,
+	hsa_status_t (*hsa_amd_pointer_info)(const void *ptr,
 					     hsa_amd_pointer_info_t *info,
 					     void *(*alloc)(size_t),
 					     uint32_t *num_agents_accessible,
@@ -597,8 +598,8 @@ int rocr_get_base_addr(const void *ptr, void **base, size_t *size)
 int rocr_get_handle(void *dev_buf, size_t size, void **handle)
 {
 	hsa_status_t hsa_ret;
-
-	hsa_ret = hsa_ops.hsa_amd_ipc_memory_create(dev_buf, size,
+	printf("AKOLLIAS TEST\n");
+	hsa_ret = hsa_ops.hsa_amd_ipc_memory_create(dev_buf, size, //size in bites here handle key?
 				(hsa_amd_ipc_memory_t *)handle);
 
 	if (hsa_ret == HSA_STATUS_SUCCESS)
